@@ -1,0 +1,53 @@
+<ul class="tabs">
+	<li>
+		<input type="radio" name="tabs" id="tab1" checked />
+        <label for="tab1">何したい？</label>
+        <div id="tab-content1" class="tab-content">
+			<%= form_for(@event) do |f| %>
+			  <% if @event.errors.any? %>
+			    <div id="error_explanation">
+			      <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
+
+			      <ul>
+			      <% @event.errors.full_messages.each do |message| %>
+			        <li><%= message %></li>
+			      <% end %>
+			      </ul>
+			    </div>
+			  <% end %>
+
+			  <div class="field">
+			    <%= f.text_field :title %>
+			  </div>
+			  <div class="actions">
+			    <%= f.submit %>
+			  </div>
+			<% end %>
+	</li>
+
+	<li>
+		<input type="radio" name="tabs" id="tab2" />
+        <label for="tab2">出てる案</label>
+        <div id="tab-content2" class="tab-content">
+			<tbody>
+			    <% @events.each do |event| %>
+			      <tr>
+			        <td><%= event.title %></td>
+			        <% if false %><td><%= event.author %></td><% end %>
+			        <div id="editer">
+				        <% if false %><td><%= link_to '見る', event %></td><% end %>
+				        <td><%= link_to '変更する', edit_event_path(event) %></td>
+				        <td><%= link_to '消す', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+				    </div>
+			      </tr>
+			      <br>
+			    <% end %>
+		</tbody>
+	</li>
+</ul>
+
+<% if false %>
+<div class="back">
+	<%= link_to 'Back', events_path %>
+</div>
+<% end %>
